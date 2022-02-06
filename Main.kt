@@ -4,12 +4,16 @@ import java.util.Scanner
 fun main() {
     val scanner = Scanner(System.`in`)
     var spots = MutableList(0) { Spot(true, Car("", "")) }
+
     while (true) { // create infinite loop for inputs from scanner. We will break it only with "exit" command that causes break
+
     val input = scanner.nextLine().split(" ").map { it }.toMutableList() // split input and put it in list
-    // no spot = can't read commands other than create
+
+    // if there is no spots -> can't read commands other than "create" & "exit"
     if (spots.size < 1 && input.first() != "create" && input.first() != "exit") {
         println("Sorry, a parking lot has not been created.")
-    } else {
+    }
+    else {
         when (input.first()) { // first word should be a command. check what command this is
             "create" -> spots = create(input[1].toInt()) // create *size* - creates a parking lot with N spots
             "park" -> park(spots, input) // park *Plate* *Color* - parks car at first available spot
